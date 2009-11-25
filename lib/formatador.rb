@@ -29,8 +29,12 @@ class Formatador
     :background_white   => "\e[47m"
   }
 
+  def initialize
+    @indent = 1
+  end
+
   def display(string, styles = [])
-    print(format(string, [*styles]))
+    print(format("#{indentation}#{string}", [*styles]))
   end
 
   def display_line(string, styles = [])
@@ -52,6 +56,16 @@ class Formatador
     else
       string
     end
+  end
+
+  def indent(&block)
+    @indent += 1
+    yield
+    @indent -= 1
+  end
+
+  def indentation
+    '  ' * @indent
   end
 
 end
