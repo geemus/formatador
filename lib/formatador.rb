@@ -1,58 +1,71 @@
 class Formatador
 
   STYLES = {
-    :reset              => "\e[0m",
-    :bold               => "\e[1m",
-    :underline          => "\e[4m",
-    :blink_slow         => "\e[5m",
-    :blink_fast         => "\e[6m",
-    :negative           => "\e[7m", # invert color/background_color
-    :normal             => "\e[22m",
-    :underline_none     => "\e[24m",
-    :blink_off          => "\e[25m",
-    :positive           => "\e[27m", # revert color/background_color
-    :foreground_black   => "\e[30m",
-    :foreground_red     => "\e[31m",
-    :foreground_green   => "\e[32m",
-    :foreground_yellow  => "\e[33m",
-    :foreground_blue    => "\e[34m",
-    :foreground_magenta => "\e[35m",
-    :foreground_cyan    => "\e[36m",
-    :foreground_white   => "\e[37m",
-    :background_black   => "\e[40m",
-    :background_red     => "\e[41m",
-    :background_green   => "\e[42m",
-    :background_yellow  => "\e[43m",
-    :background_blue    => "\e[44m",
-    :background_magenta => "\e[45m",
-    :background_cyan    => "\e[46m",
-    :background_white   => "\e[47m"
+    :"\/"             => "0",
+    :reset            => "0",
+    :bold             => "1",
+    :underline        => "4",
+    :blink_slow       => "5",
+    :blink_fast       => "6",
+    :negative         => "7", # invert color/color
+    :normal           => "22",
+    :underline_none   => "24",
+    :blink_off        => "25",
+    :positive         => "27", # revert color/color
+    :black            => "30",
+    :red              => "31",
+    :green            => "32",
+    :yellow           => "33",
+    :blue             => "34",
+    :magenta          => "35",
+    :purple           => "35",
+    :cyan             => "36",
+    :white            => "37",
+    :_black_          => "40",
+    :_red_            => "41",
+    :_green_          => "42",
+    :_yellow_         => "43",
+    :_blue_           => "44",
+    :_magenta_        => "45",
+    :_purple_         => "45",
+    :_cyan_           => "46",
+    :_white_          => "47",
+    :light_black      => "90",
+    :light_red        => "91",
+    :light_green      => "92",
+    :light_yellow     => "93",
+    :light_blue       => "94",
+    :light_magenta    => "95",
+    :light_purple     => "95",
+    :light_cyan       => "96",
+    :_light_black_    => "100",
+    :_light_red_      => "101",
+    :_light_green_    => "102",
+    :_light_yellow_   => "103",
+    :_light_blue_     => "104",
+    :_light_magenta_  => "105",
+    :_light_purple_   => "105",
+    :_light_cyan_     => "106",
   }
+
+  FORMAT_REGEX = /\[(#{ STYLES.keys.join('|') })\]/ix
 
   def initialize
     @indent = 1
   end
 
-  def display(string, styles = [])
-    print(format("#{indentation}#{string}", [*styles]))
+  def display(string)
+    print(format("#{indentation}#{string}"))
   end
 
-  def display_line(string, styles = [])
-    display(string, styles)
+  def display_line(string)
+    display(string)
     print("\n")
   end
 
-  def format(string, styles, reset = true)
-    if STDOUT.tty? && !styles.empty?
-      formated = ''
-      for style in styles
-        formated << STYLES[style]
-      end
-      formated << string
-      if reset
-        formated << STYLES[:reset]
-      end
-      formated
+  def format(string)
+    if STDOUT.tty?
+      string.gsub(FORMAT_REGEX) { "\e[#{STYLES[$1.to_sym]}m" }
     else
       string
     end
