@@ -49,13 +49,14 @@ class Formatador
   }
 
   FORMAT_REGEX = /\[(#{ STYLES.keys.join('|') })\]/ix
+  INDENT_REGEX = /\[indent\]/ix
 
   def initialize
     @indent = 1
   end
 
   def display(string)
-    print(format("#{indentation}#{string}"))
+    print(format("[indent]#{string}"))
   end
 
   def display_line(string)
@@ -65,7 +66,7 @@ class Formatador
 
   def format(string)
     if STDOUT.tty?
-      string.gsub(FORMAT_REGEX) { "\e[#{STYLES[$1.to_sym]}m" }
+      string.gsub(FORMAT_REGEX) { "\e[#{STYLES[$1.to_sym]}m" }.gsub(INDENT_REGEX) { indentation }
     else
       string
     end
