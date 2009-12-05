@@ -55,11 +55,12 @@ class Formatador
     @indent = 1
   end
 
-  def display(string)
+  def display(string = '')
     print(format("[indent]#{string}"))
+    STDOUT.flush
   end
 
-  def display_line(string)
+  def display_line(string = '')
     display(string)
     print("\n")
   end
@@ -80,6 +81,11 @@ class Formatador
 
   def indentation
     '  ' * @indent
+  end
+
+  def redisplay(string = '')
+    print("\r")
+    display("#{string}")
   end
 
 end
