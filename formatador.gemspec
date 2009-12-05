@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{formatador}
-  s.version = "0.0.3"
+  s.version = "0.0.4"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Wesley Beary"]
-  s.date = %q{2009-12-03}
+  s.date = %q{2009-12-04}
   s.description = %q{STDOUT text formatting}
   s.email = %q{wbeary@engineyard.com}
   s.extra_rdoc_files = [
