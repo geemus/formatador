@@ -65,6 +65,26 @@ class Formatador
     print("\n")
   end
 
+  def display_table(data)
+    widths = []
+    data.each do |row|
+      row.length.times do |column|
+        widths[column] = [(widths[column] || 0), row[column].to_s.length].max
+      end
+    end
+
+    display_line("+#{widths.map{|width| '-' * (width.to_s.length + 2)}.join('+')}+")
+    data.length.times do |row|
+      columns = []
+      widths.length.times do |column|
+        value = data[row][column] || ''
+        columns << "#{value}#{' ' * (widths[column] - value.to_s.length)}"
+      end
+      display_line("| #{columns.join(' | ')} |")
+      display_line("+#{widths.map{|width| '-' * (width.to_s.length + 2)}.join('+')}+")
+    end
+  end
+
   def format(string)
     if STDOUT.tty?
       string.gsub(FORMAT_REGEX) { "\e[#{STYLES[$1.to_sym]}m" }.gsub(INDENT_REGEX) { indentation }
