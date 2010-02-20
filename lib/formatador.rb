@@ -65,23 +65,36 @@ class Formatador
     print("\n")
   end
 
-  def display_table(data)
-    widths = []
-    data.each do |row|
-      row.length.times do |column|
-        widths[column] = [(widths[column] || 0), row[column].to_s.length].max
+  def display_table(hashes, keys = nil)
+    headers = keys || []
+    widths = {}
+    for hash in hashes
+      for key, value in hash.keys
+        unless keys
+          headers << key
+        end
+        widths[key] = [key.to_s.length, widths[key] || 0, hash[key] && hash[key].length || 0].max
       end
+      headers = headers.uniq
     end
 
-    display_line("+#{widths.map{|width| '-' * (width.to_s.length + 2)}.join('+')}+")
-    data.length.times do |row|
+    split = "+"
+    for header in headers
+      split << ('-' * (widths[header] + 2)) << '+'
+    end
+
+    display_line(split)
+    display_line("| #{headers.join(' | ')} |")
+    display_line(split)
+
+    for hash in hashes
       columns = []
-      widths.length.times do |column|
-        value = data[row][column] || ''
-        columns << "#{value}#{' ' * (widths[column] - value.to_s.length)}"
+      for header in headers
+        datum = hash[header] || ''
+        columns << "#{datum}#{' ' * (widths[header] - datum.length)}"
       end
       display_line("| #{columns.join(' | ')} |")
-      display_line("+#{widths.map{|width| '-' * (width.to_s.length + 2)}.join('+')}+")
+      display_line(split)
     end
   end
 
