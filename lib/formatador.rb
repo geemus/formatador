@@ -102,7 +102,7 @@ class Formatador
     if STDOUT.tty?
       string.gsub(FORMAT_REGEX) { "\e[#{STYLES[$1.to_sym]}m" }.gsub(INDENT_REGEX) { indentation }
     else
-      string.gsub(INDENT_REGEX) { indentation }
+      string.gsub(FORMAT_REGEX, '').gsub(INDENT_REGEX) { indentation }
     end
   end
 
