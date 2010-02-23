@@ -86,7 +86,11 @@ class Formatador
     end
 
     display_line(split)
-    display_line("| #{headers.join(' | ')} |")
+    columns = []
+    for header in headers
+      columns << "#{header}#{' ' * (widths[header] - header.to_s.length)}"
+    end
+    display_line("| #{columns.join(' | ')} |")
     display_line(split)
 
     for hash in hashes
