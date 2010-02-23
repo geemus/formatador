@@ -121,4 +121,12 @@ class Formatador
     display("#{string}")
   end
 
+  %w{display display_line display_table format redisplay}.each do |method|
+    eval <<-DEF
+      def self.#{method}(*args)
+        new.#{method}(*args)
+      end
+    DEF
+  end
+
 end
