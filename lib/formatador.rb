@@ -91,7 +91,7 @@ class Formatador
       columns = []
       for header in headers
         datum = hash[header] || ''
-        columns << "#{datum}#{' ' * (widths[header] - datum.length)}"
+        columns << "#{datum}#{' ' * (widths[header] - datum.to_s.length)}"
       end
       display_line("| #{columns.join(' | ')} |")
       display_line(split)
