@@ -58,11 +58,13 @@ class Formatador
   def display(string = '')
     print(format("[indent]#{string}"))
     STDOUT.flush
+    nil
   end
 
   def display_line(string = '')
     display(string)
     print("\n")
+    nil
   end
 
   def display_table(hashes, keys = nil)
@@ -96,6 +98,7 @@ class Formatador
       display_line("| #{columns.join(' | ')} |")
       display_line(split)
     end
+    nil
   end
 
   def format(string)
@@ -119,6 +122,7 @@ class Formatador
   def redisplay(string = '')
     print("\r")
     display("#{string}")
+    nil
   end
 
   %w{display display_line display_table format redisplay}.each do |method|
