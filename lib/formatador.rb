@@ -73,7 +73,7 @@ class Formatador
         unless keys
           headers << key
         end
-        widths[key] = [key.to_s.length, widths[key] || 0, hash[key] && hash[key].length || 0].max
+        widths[key] = [key.to_s.length, widths[key] || 0, hash[key] && hash[key].to_s.length || 0].max
       end
       headers = headers.uniq
     end
