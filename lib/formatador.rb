@@ -67,11 +67,11 @@ class Formatador
     nil
   end
 
-  def display_table(hashes, keys = nil)
+  def display_table(hashes, keys = nil, &block)
     headers = keys || []
     widths = {}
     for hash in hashes
-      for key, value in hash.keys
+      for key in hash.keys
         unless keys
           headers << key
         end
@@ -80,9 +80,19 @@ class Formatador
       headers = headers.uniq
     end
 
+    unless block_given?
+      headers = headers.sort {|x,y| x.to_s <=> y.to_s}
+    else
+      headers = headers.sort(&block)
+    end
+
     split = "+"
-    for header in headers
-      split << ('-' * (widths[header] + 2)) << '+'
+    if headers.empty?
+      split << '--+'
+    else
+      for header in headers
+        split << ('-' * (widths[header] + 2)) << '+'
+      end
     end
 
     display_line(split)
@@ -131,8 +141,8 @@ class Formatador
 
   %w{display display_line display_table format redisplay}.each do |method|
     eval <<-DEF
-      def self.#{method}(*args)
-        new.#{method}(*args)
+      def self.#{method}(*args, &block)
+        new.#{method}(*args, &block)
       end
     DEF
   end
