@@ -80,10 +80,10 @@ class Formatador
       headers = headers.uniq
     end
 
-    unless block_given?
-      headers = headers.sort {|x,y| x.to_s <=> y.to_s}
-    else
+    if block_given?
       headers = headers.sort(&block)
+    elsif !keys
+      headers = headers.sort {|x,y| x.to_s <=> y.to_s}
     end
 
     split = "+"
