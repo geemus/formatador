@@ -1,3 +1,6 @@
+require File.join(File.dirname(__FILE__), 'formatador', 'table')
+require File.join(File.dirname(__FILE__), 'formatador', 'progressbar')
+
 class Formatador
 
   STYLES = {
@@ -67,54 +70,6 @@ class Formatador
     nil
   end
 
-  def display_table(hashes, keys = nil, &block)
-    headers = keys || []
-    widths = {}
-    for hash in hashes
-      for key in hash.keys
-        unless keys
-          headers << key
-        end
-        widths[key] = [key.to_s.length, widths[key] || 0, hash[key] && hash[key].to_s.length || 0].max
-      end
-      headers = headers.uniq
-    end
-
-    if block_given?
-      headers = headers.sort(&block)
-    elsif !keys
-      headers = headers.sort {|x,y| x.to_s <=> y.to_s}
-    end
-
-    split = "+"
-    if headers.empty?
-      split << '--+'
-    else
-      for header in headers
-        split << ('-' * (widths[header] + 2)) << '+'
-      end
-    end
-
-    display_line(split)
-    columns = []
-    for header in headers
-      columns << "#{header}#{' ' * (widths[header] - header.to_s.length)}"
-    end
-    display_line("| #{columns.join(' | ')} |")
-    display_line(split)
-
-    for hash in hashes
-      columns = []
-      for header in headers
-        datum = hash[header] || ''
-        columns << "#{datum}#{' ' * (widths[header] - datum.to_s.length)}"
-      end
-      display_line("| #{columns.join(' | ')} |")
-      display_line(split)
-    end
-    nil
-  end
-
   def format(string)
     if STDOUT.tty?
       string.gsub(FORMAT_REGEX) { "\e[#{STYLES[$1.to_sym]}m" }.gsub(INDENT_REGEX) { indentation }
@@ -139,7 +94,7 @@ class Formatador
     nil
   end
 
-  %w{display display_line display_table format redisplay}.each do |method|
+  %w{display display_line display_table format redisplay redisplay_progressbar}.each do |method|
     eval <<-DEF
       def self.#{method}(*args, &block)
         new.#{method}(*args, &block)
