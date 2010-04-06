@@ -12,7 +12,7 @@ You use tags, similar to html, to set formatting options:
 
   Formatador.display_line('[green]Hello World[/]')
 
-[/] resets everything to normal, colors are supported and [_color_] sets the background color.
+  [/] resets everything to normal, colors are supported and [_color_] sets the background color.
 
 == Standard options
 
