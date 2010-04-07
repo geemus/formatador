@@ -20,6 +20,10 @@ class Formatador
 
     output = []
 
+    if options[:label]
+      output << options[:label]
+    end
+
     padding = ' ' * (total.to_s.size - current.to_s.size)
     output << "[#{color}]#{padding}#{current}/#{total}[/]"
 
@@ -34,7 +38,7 @@ class Formatador
     end
 
     output << ''
-    output.join(' ')
+    output.join('  ')
   end
 
 end
