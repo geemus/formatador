@@ -103,3 +103,9 @@ class Formatador
   end
 
 end
+
+if __FILE__ == $0
+
+  Formatador.display_line("[negative]Formatador![/]")
+
+end
