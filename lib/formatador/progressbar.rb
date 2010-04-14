@@ -30,7 +30,7 @@ class Formatador
     percent = current.to_f / total.to_f
     done = '*' * (percent * width).ceil
     remaining = ' ' * (width - done.length)
-    output << "[_white_]|[/][#{color}][_#{color}_]#{done}[/]#{remaining)}[_white_]|[/]"
+    output << "[_white_]|[/][#{color}][_#{color}_]#{done}[/]#{remaining}[_white_]|[/]"
 
     if started_at
       elapsed = Time.now - started_at
