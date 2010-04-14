@@ -51,7 +51,7 @@ class Formatador
     :_light_cyan_     => "106",
   }
 
-  FORMAT_REGEX = /\[(#{ STYLES.keys.join('|') })\]/ix
+  PARSE_REGEX  = /\[(#{ STYLES.keys.join('|') })\]/ix
   INDENT_REGEX = /\[indent\]/ix
 
   def initialize
@@ -59,7 +59,7 @@ class Formatador
   end
 
   def display(string = '')
-    print(format("[indent]#{string}"))
+    print(parse("[indent]#{string}"))
     STDOUT.flush
     nil
   end
@@ -70,11 +70,11 @@ class Formatador
     nil
   end
 
-  def format(string)
+  def parse(string)
     if STDOUT.tty?
-      string.gsub(FORMAT_REGEX) { "\e[#{STYLES[$1.to_sym]}m" }.gsub(INDENT_REGEX) { indentation }
+      string.gsub(PARSE_REGEX) { "\e[#{STYLES[$1.to_sym]}m" }.gsub(INDENT_REGEX) { indentation }
     else
-      string.gsub(FORMAT_REGEX, '').gsub(INDENT_REGEX) { indentation }
+      string.gsub(PARSE_REGEX, '').gsub(INDENT_REGEX) { indentation }
     end
   end
 
@@ -94,7 +94,7 @@ class Formatador
     nil
   end
 
-  %w{display display_line display_table format redisplay redisplay_progressbar}.each do |method|
+  %w{display display_line display_table parse redisplay redisplay_progressbar}.each do |method|
     eval <<-DEF
       def self.#{method}(*args, &block)
         new.#{method}(*args, &block)
