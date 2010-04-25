@@ -70,6 +70,13 @@ class Formatador
     nil
   end
 
+  def display_lines(lines = [])
+    for line in lines
+      display_line(line)
+    end
+    nil
+  end
+
   def parse(string)
     if STDOUT.tty?
       string.gsub(PARSE_REGEX) { "\e[#{STYLES[$1.to_sym]}m" }.gsub(INDENT_REGEX) { indentation }
@@ -94,7 +101,7 @@ class Formatador
     nil
   end
 
-  %w{display display_line display_table parse redisplay redisplay_progressbar}.each do |method|
+  %w{display display_line display_lines display_table parse redisplay redisplay_progressbar}.each do |method|
     eval <<-DEF
       def self.#{method}(*args, &block)
         new.#{method}(*args, &block)
@@ -107,5 +114,9 @@ end
 if __FILE__ == $0
 
   Formatador.display_line("[negative]Formatador![/]")
+  Formatador.display_lines([
+    'one',
+    'two'
+  ])
 
 end
