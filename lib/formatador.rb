@@ -120,5 +120,6 @@ if __FILE__ == $0
     'one',
     'two'
   ])
+  Formatador.display_table([], [:foo])
 
 end

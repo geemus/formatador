@@ -3,14 +3,20 @@ class Formatador
   def display_table(hashes, keys = nil, &block)
     headers = keys || []
     widths = {}
-    for hash in hashes
-      for key in hash.keys
-        unless keys
-          headers << key
-        end
-        widths[key] = [key.to_s.length, widths[key] || 0, hash[key] && hash[key].to_s.length || 0].max
+    if hashes.empty? && keys
+      for key in keys
+        widths[key] = key.to_s.length
       end
-      headers = headers.uniq
+    else
+      for hash in hashes
+        for key in hash.keys
+          unless keys
+            headers << key
+          end
+          widths[key] = [key.to_s.length, widths[key] || 0, hash[key] && hash[key].to_s.length || 0].max
+        end
+        headers = headers.uniq
+      end
     end
 
     if block_given?
@@ -31,7 +37,7 @@ class Formatador
     display_line(split)
     columns = []
     for header in headers
-      columns << "#{header}#{' ' * (widths[header] - header.to_s.length)}"
+      columns << "[bold]#{header}[/]#{' ' * (widths[header] - header.to_s.length)}"
     end
     display_line("| #{columns.join(' | ')} |")
     display_line(split)
