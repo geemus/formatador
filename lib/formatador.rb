@@ -73,7 +73,7 @@ class Formatador
   end
 
   def display_lines(lines = [])
-    for line in lines
+    for line in [*lines]
       display_line(line)
     end
     nil
