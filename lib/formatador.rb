@@ -103,10 +103,11 @@ class Formatador
     nil
   end
 
-  %w{display display_line display_lines display_table parse redisplay redisplay_progressbar}.each do |method|
+  %w{display display_line display_lines display_table indent parse redisplay redisplay_progressbar}.each do |method|
     eval <<-DEF
       def self.#{method}(*args, &block)
-        new.#{method}(*args, &block)
+        Thread.current[:formatador] ||= new
+        Thread.current[:formatador].#{method}(*args, &block)
       end
     DEF
   end
@@ -116,10 +117,12 @@ end
 if __FILE__ == $0
 
   Formatador.display_line("[negative]Formatador![/]")
-  Formatador.display_lines([
-    'one',
-    'two'
-  ])
+  Formatador.indent do
+    Formatador.display_lines([
+      'one',
+      'two'
+    ])
+  end
   Formatador.display_table([], [:foo])
 
 end
