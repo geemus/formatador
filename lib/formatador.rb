@@ -56,8 +56,6 @@ class Formatador
   PARSE_REGEX  = /\[(#{ STYLES.keys.join('|') })\]/ix
   INDENT_REGEX = /\[indent\]/ix
 
-  attr_accessor :indent
-
   def initialize
     @indent = 1
   end
