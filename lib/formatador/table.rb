@@ -30,7 +30,7 @@ class Formatador
       split << '--+'
     else
       for header in headers
-        widths[header] ||= 0
+        widths[header] ||= header.to_s.length
         split << ('-' * (widths[header] + 2)) << '+'
       end
     end
