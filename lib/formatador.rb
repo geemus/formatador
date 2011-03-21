@@ -113,16 +113,3 @@ class Formatador
   end
 
 end
-
-if __FILE__ == $0
-
-  Formatador.display_line("[negative]Formatador![/]")
-  Formatador.indent do
-    Formatador.display_lines([
-      'one',
-      'two'
-    ])
-  end
-  Formatador.display_table([], [:foo])
-
-end
