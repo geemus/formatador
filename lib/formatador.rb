@@ -98,7 +98,7 @@ class Formatador
   end
 
   def redisplay(string = '')
-    print("\r")
+    print("\r#{' ' * 80}\r")
     display("#{string}")
     nil
   end
