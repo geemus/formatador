@@ -22,7 +22,7 @@ class Formatador
           unless keys
             headers << key
           end
-          widths[key] = [ key.to_s.gsub(/\[\w+\]/,'').length, widths[key] || 0, hash[key] && hash[key].to_s.gsub(/\[\w+\]/,'').length || 0].max
+          widths[key] = [ length(key), widths[key] || 0, hash[key] && length(hash[key]) || 0].max
         end
         headers = headers.uniq
       end
@@ -39,7 +39,7 @@ class Formatador
       split << '--+'
     else
       for header in headers
-        widths[header] ||= header.to_s.gsub(/\[\w+\]/,'').length
+        widths[header] ||= length(header)
         split << ('-' * (widths[header] + 2)) << '+'
       end
     end
@@ -57,8 +57,7 @@ class Formatador
         columns = []
         for header in headers
           datum = hash[header] || ''
-          datum_length = datum.to_s.gsub(/\[\w+\]/,'').length
-          columns << "#{datum}#{' ' * (widths[header] - datum_length)}"
+          columns << "#{datum}#{' ' * (widths[header] - length(datum))}"
         end
         display_line("| #{columns.join(' | ')} |")
       else
@@ -69,5 +68,11 @@ class Formatador
       nil
     end
     display_line(split)
+  end
+
+  private
+
+  def length(value)
+    value.to_s.gsub(PARSE_REGEX, '').length
   end
 end
