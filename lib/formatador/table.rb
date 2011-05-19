@@ -1,6 +1,13 @@
 class Formatador
-
   def display_table(hashes, keys = nil, &block)
+    new_hashes = hashes.inject([]) do |accum,item|
+      accum << :split unless accum.empty?
+      accum << item
+    end
+    display_compact_table(new_hashes, keys, &block)
+  end
+
+  def display_compact_table(hashes, keys = nil, &block)
     headers = keys || []
     widths = {}
     if hashes.empty? && keys
@@ -9,11 +16,13 @@ class Formatador
       end
     else
       for hash in hashes
+        next unless hash.respond_to?(:keys)
+
         for key in hash.keys
           unless keys
             headers << key
           end
-          widths[key] = [key.to_s.length, widths[key] || 0, hash[key] && hash[key].to_s.length || 0].max
+          widths[key] = [ key.to_s.gsub(/\[\w+\]/,'').length, widths[key] || 0, hash[key] && hash[key].to_s.gsub(/\[\w+\]/,'').length || 0].max
         end
         headers = headers.uniq
       end
@@ -30,7 +39,7 @@ class Formatador
       split << '--+'
     else
       for header in headers
-        widths[header] ||= header.to_s.length
+        widths[header] ||= header.to_s.gsub(/\[\w+\]/,'').length
         split << ('-' * (widths[header] + 2)) << '+'
       end
     end
@@ -44,15 +53,21 @@ class Formatador
     display_line(split)
 
     for hash in hashes
-      columns = []
-      for header in headers
-        datum = hash[header] || ''
-        columns << "#{datum}#{' ' * (widths[header] - datum.to_s.length)}"
+      if hash.respond_to? :keys
+        columns = []
+        for header in headers
+          datum = hash[header] || ''
+          datum_length = datum.to_s.gsub(/\[\w+\]/,'').length
+          columns << "#{datum}#{' ' * (widths[header] - datum_length)}"
+        end
+        display_line("| #{columns.join(' | ')} |")
+      else
+        if hash == :split
+          display_line(split)
+        end 
       end
-      display_line("| #{columns.join(' | ')} |")
-      display_line(split)
+      nil
     end
-    nil
+    display_line(split)
   end
-
 end
