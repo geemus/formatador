@@ -24,6 +24,7 @@ You use tags, similar to html, to set formatting options:
 == Extensions
 
 * display_table: takes an array of hashes. Each hash is a row, with the keys being the headers and values being the data. An optional second argument can specify which headers/columns to include and in what order they should appear.
+* display_compact_table: Same as display_table, execpt that split lines are not drawn by default in the body of the table. If you need a split line, put a :split constant in the body array.
 * redisplay_progressbar: takes the current and total values as its first two arguments and redisplays a progressbar (until current = total and then it display_lines). An optional third argument represents the start time and will add an elapsed time counter.
 
 == Indentation

@@ -103,7 +103,7 @@ class Formatador
     nil
   end
 
-  %w{display display_line display_lines display_table indent parse redisplay redisplay_progressbar}.each do |method|
+  %w{display display_line display_lines display_table display_compact_table indent parse redisplay redisplay_progressbar}.each do |method|
     eval <<-DEF
       def self.#{method}(*args, &block)
         Thread.current[:formatador] ||= new
