@@ -109,6 +109,11 @@ class Formatador
     nil
   end
 
+  def new_line
+    print("\n")
+    nil
+  end
+
   %w{display display_line display_lines display_table display_compact_table indent parse redisplay redisplay_progressbar}.each do |method|
     eval <<-DEF
       def self.#{method}(*args, &block)
