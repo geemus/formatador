@@ -20,6 +20,7 @@ output = <<-OUTPUT
     +--------+
     | \e[1mheader\e[0m |
     +--------+
+    +--------+
 OUTPUT
 
   tests("#display_table([], [:header])").returns(output) do
