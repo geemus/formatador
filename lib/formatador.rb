@@ -97,14 +97,14 @@ class Formatador
     '  ' * @indent
   end
 
-  def redisplay(string = '')
-    print("\r#{' ' * 80}\r")
+  def redisplay(string = '', width = 120)
+    print("\r#{' ' * width}\r")
     display("#{string}")
     nil
   end
 
-  def redisplay_line(string = '')
-    redisplay(string)
+  def redisplay_line(string = '', width = 120)
+    redisplay(string, width)
     print("\n")
     nil
   end
