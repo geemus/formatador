@@ -32,7 +32,7 @@ class Formatador
     # longer than the "total" string without problems. eg- current =
     # 9.99, total = 10
     padding = total.to_s.size * 2 + 3
-    
+
     output << "[#{color}]%#{padding}s[/]" % "#{current}/#{total}"
 
     percent = current.to_f / total.to_f
