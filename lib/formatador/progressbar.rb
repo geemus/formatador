@@ -1,12 +1,15 @@
 class Formatador
 
   def redisplay_progressbar(current, total, options = {})
-    options = { :color => 'white', :width => 50, :newline => true }.merge!(options)
+    options = { :color => 'white', :width => 50, :new_line => true }.merge!(options)
     data = progressbar(current, total, options)
     if current < total
       redisplay(data)
     else
-      redisplay("#{data}%s" % [options[:newline] ? "\n" : ""])
+      redisplay("#{data}")
+      if options[:new_line]
+        new_line
+      end
       @progressbar_started_at = nil
     end
   end

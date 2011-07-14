@@ -68,7 +68,7 @@ class Formatador
 
   def display_line(string = '')
     display(string)
-    print("\n")
+    new_line
     nil
   end
 
@@ -105,7 +105,7 @@ class Formatador
 
   def redisplay_line(string = '', width = 120)
     redisplay(string, width)
-    print("\n")
+    new_line
     nil
   end
 
