@@ -97,13 +97,24 @@ class Formatador
     '  ' * @indent
   end
 
-  def redisplay(string = '')
-    print("\r#{' ' * 80}\r")
+  def redisplay(string = '', width = 120)
+    print("\r#{' ' * width}\r")
     display("#{string}")
     nil
   end
 
-  %w{display display_line display_lines display_table display_compact_table indent parse redisplay redisplay_progressbar}.each do |method|
+  def redisplay_line(string = '', width = 120)
+    redisplay(string, width)
+    print("\n")
+    nil
+  end
+
+  def new_line
+    print("\n")
+    nil
+  end
+
+  %w{display display_line display_lines display_table display_compact_table indent parse redisplay redisplay_line new_line redisplay_progressbar}.each do |method|
     eval <<-DEF
       def self.#{method}(*args, &block)
         Thread.current[:formatador] ||= new

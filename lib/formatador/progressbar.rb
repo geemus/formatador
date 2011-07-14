@@ -1,12 +1,12 @@
 class Formatador
 
   def redisplay_progressbar(current, total, options = {})
-    options = { :color => 'white', :width => 50 }.merge!(options)
+    options = { :color => 'white', :width => 50, :newline => true }.merge!(options)
     data = progressbar(current, total, options)
     if current < total
       redisplay(data)
     else
-      redisplay("#{data}\n")
+      redisplay("#{data}%s" % [options[:newline] ? "\n" : ""])
       @progressbar_started_at = nil
     end
   end
@@ -32,7 +32,7 @@ class Formatador
     # longer than the "total" string without problems. eg- current =
     # 9.99, total = 10
     padding = total.to_s.size * 2 + 3
-    
+
     output << "[#{color}]%#{padding}s[/]" % "#{current}/#{total}"
 
     percent = current.to_f / total.to_f
