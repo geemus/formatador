@@ -83,7 +83,7 @@ class Formatador
     if STDOUT.tty?
       string.gsub(PARSE_REGEX) { "\e[#{STYLES[$1.to_sym]}m" }.gsub(INDENT_REGEX) { indentation }
     else
-      string.gsub(PARSE_REGEX, '').gsub(INDENT_REGEX) { indentation }
+      strip(string)
     end
   end
 
@@ -112,6 +112,10 @@ class Formatador
   def new_line
     print("\n")
     nil
+  end
+
+  def strip(string)
+    string.gsub(PARSE_REGEX, '').gsub(INDENT_REGEX) { indentation }
   end
 
   %w{display display_line display_lines display_table display_compact_table indent parse redisplay redisplay_line new_line redisplay_progressbar}.each do |method|
