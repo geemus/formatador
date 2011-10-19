@@ -2,13 +2,14 @@ Shindo.tests("Formatador") do
 
 output = <<-OUTPUT
     +---+
-    | \e[1ma\e[0m |
+    | [bold]a[/] |
     +---+
     | 1 |
     +---+
     | 2 |
     +---+
 OUTPUT
+output = Formatador.parse(output)
 
   tests("#display_table([{:a => 1}, {:a => 2}])").returns(output) do
     capture_stdout do
@@ -18,10 +19,11 @@ OUTPUT
 
 output = <<-OUTPUT
     +--------+
-    | \e[1mheader\e[0m |
+    | [bold]header[/] |
     +--------+
     +--------+
 OUTPUT
+output = Formatador.parse(output)
 
   tests("#display_table([], [:header])").returns(output) do
     capture_stdout do
@@ -31,11 +33,12 @@ OUTPUT
 
 output = <<-OUTPUT
     +--------+
-    | \e[1mheader\e[0m |
+    | [bold]header[/] |
     +--------+
     |        |
     +--------+
 OUTPUT
+output = Formatador.parse(output)
 
   tests("#display_table([{:a => 1}], [:header])").returns(output) do
     capture_stdout do

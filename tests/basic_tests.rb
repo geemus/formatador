@@ -10,6 +10,7 @@ output = <<-OUTPUT
     one
     two
 OUTPUT
+output = Formatador.parse(output)
 
   tests("#display_lines(['one', 'two']").returns(output) do
     capture_stdout do
