@@ -3,6 +3,7 @@ $LOAD_PATH.unshift(File.dirname(__FILE__))
 require 'formatador'
 require 'rubygems'
 require 'shindo'
+require 'stringio'
 
 def capture_stdout
   old_stdout = $stdout
