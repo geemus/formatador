@@ -1,4 +1,4 @@
-Shindo.tests("Formatador") do
+Shindo.tests("Formatador: basics") do
 
   tests("#display_line(Formatador)").returns("    Formatador\n") do
     capture_stdout do

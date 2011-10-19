@@ -1,4 +1,4 @@
-Shindo.tests("Formatador") do
+Shindo.tests("Formatador: tables") do
 
 output = <<-OUTPUT
     +---+
