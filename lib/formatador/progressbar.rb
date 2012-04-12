@@ -4,9 +4,9 @@ class Formatador
     options = { :color => 'white', :width => 50, :new_line => true }.merge!(options)
     data = progressbar(current, total, options)
     if current < total
-      redisplay(data)
+      redisplay(data, options[:width])
     else
-      redisplay("#{data}")
+      redisplay("#{data}", options[:width])
       if options[:new_line]
         new_line
       end
