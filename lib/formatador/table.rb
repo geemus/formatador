@@ -56,7 +56,14 @@ class Formatador
       if hash.respond_to? :keys
         columns = []
         for header in headers
-          datum = hash[header] || ''
+          if (splits = header.to_s.split('.')).length > 1
+            datum = nil
+            splits.each do |split|
+              datum = (datum||hash)[split.to_sym]
+            end
+          else
+            datum = hash[header] || ''
+          end
           columns << "#{datum}#{' ' * (widths[header] - length(datum))}"
         end
         display_line("| #{columns.join(' | ')} |")
