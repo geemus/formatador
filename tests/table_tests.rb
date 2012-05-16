@@ -63,19 +63,19 @@ output = Formatador.parse(output)
     end
   end
 
-# TODO: Make this test pass
-# output = <<-OUTPUT
-#     +---+-----------------+
-#     | [bold]a[/] | [bold]nested[/] |
-#     +---+-----------------+
-#     | 1 | {:key => 'value'} |
-#     +---+-----------------+
-# OUTPUT
+output = <<-OUTPUT
+    +---+-----------------+
+    | [bold]a[/] | [bold]nested[/]          |
+    +---+-----------------+
+    | 1 | {:key=>"value"} |
+    +---+-----------------+
+OUTPUT
+output = Formatador.parse(output)
 
-#   tests("#display_table([{:a => 1, :nested => {:key => 'value'}}])").returns(output) do
-#     capture_stdout do
-#       Formatador.display_table([{:a => 1, :nested => {:key => 'value'}}])
-#     end
-#   end
+  tests("#display_table([{:a => 1, :nested => {:key => 'value'}}])").returns(output) do
+    capture_stdout do
+      Formatador.display_table([{:a => 1, :nested => {:key => 'value'}}])
+    end
+  end
 
 end
