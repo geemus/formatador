@@ -88,12 +88,7 @@ class Formatador
       datum = nil
       splits.each do |split|
         d = (datum||hash)
-        if d[split]
-          datum = d[split]
-        elsif d[split.to_sym]
-          datum = d[split.to_sym]
-        end
-        datum ||= ''
+        datum = d[split] || d[split.to_sym] || ''
       end
     else
       datum = hash[header] || ''
