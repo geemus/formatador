@@ -27,6 +27,33 @@ You use tags, similar to html, to set formatting options:
 * display_compact_table: Same as display_table, execpt that split lines are not drawn by default in the body of the table. If you need a split line, put a :split constant in the body array.
 * redisplay_progressbar: takes the current and total values as its first two arguments and redisplays a progressbar (until current = total and then it display_lines). An optional third argument represents the start time and will add an elapsed time counter.
 
+=== Table examples
+
+  table_data = [{:name => "Joe", :food => "Burger"}, {:name => "Bill", :food => "French fries"}]
+  Formatador.display_table(table_data)
+
+  +------+--------------+
+  | name | food         |
+  +------+--------------+
+  | Joe  | Burger       |
+  +------+--------------+
+  | Bill | French fries |
+  +------+--------------+
+
+  table_data = [
+    {:name => "Joe", :meal => {:main_dish => "Burger", :drink => "water"}, 
+    {:name => "Bill", :meal => {:main_dish => "Chicken", drink => "soda"}
+  ]
+  Formatador.display_table(table_data, [:name, :"meal.drink"])
+
+  +------+------------+
+  | name | meal.drink |
+  +------+------------+
+  | Joe  | water      |
+  +------+------------+
+  | Bill | soda       |
+  +------+------------+
+
 == Indentation
 
 By initializing a formatador object you can keep track of indentation:
