@@ -46,4 +46,36 @@ output = Formatador.parse(output)
     end
   end
 
+
+
+output = <<-OUTPUT
+    +---+------------+
+    | [bold]a[/] | [bold]nested.key[/] |
+    +---+------------+
+    | 1 | value      |
+    +---+------------+
+OUTPUT
+output = Formatador.parse(output)
+
+  tests("#display_table([{:a => 1, :nested => {:key => 'value'}}], [:header, :'nested.key'])").returns(output) do
+    capture_stdout do
+      Formatador.display_table([{:a => 1, :nested => {:key => 'value'}}], [:a, :'nested.key'])
+    end
+  end
+
+output = <<-OUTPUT
+    +---+-----------------+
+    | [bold]a[/] | [bold]nested[/]          |
+    +---+-----------------+
+    | 1 | {:key=>"value"} |
+    +---+-----------------+
+OUTPUT
+output = Formatador.parse(output)
+
+  tests("#display_table([{:a => 1, :nested => {:key => 'value'}}])").returns(output) do
+    capture_stdout do
+      Formatador.display_table([{:a => 1, :nested => {:key => 'value'}}])
+    end
+  end
+
 end
