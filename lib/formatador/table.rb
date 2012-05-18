@@ -84,7 +84,7 @@ class Formatador
   end
 
   def calculate_datum(header, hash)
-    if (splits = header.to_s.split('.')).length > 1
+    if !hash.keys.include?(header) && (splits = header.to_s.split('.')).length > 1
       datum = nil
       splits.each do |split|
         d = (datum||hash)
