@@ -41,8 +41,8 @@ You use tags, similar to html, to set formatting options:
   +------+--------------+
 
   table_data = [
-    {:name => "Joe", :meal => {:main_dish => "Burger", :drink => "water"}, 
-    {:name => "Bill", :meal => {:main_dish => "Chicken", drink => "soda"}
+    {:name => "Joe", :meal => {:main_dish => "Burger", :drink => "water"}}, 
+    {:name => "Bill", :meal => {:main_dish => "Chicken", :drink => "soda"}}
   ]
   Formatador.display_table(table_data, [:name, :"meal.drink"])
 
