@@ -90,6 +90,7 @@ class Formatador
   def indent(&block)
     @indent += 1
     yield
+  ensure
     @indent -= 1
   end
 
