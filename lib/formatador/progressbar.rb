@@ -1,5 +1,24 @@
 class Formatador
 
+  class ProgressBar
+
+    attr_accessor :current, :total, :opts
+
+    def initialize(total, opts = {}, &block)
+      @current = opts.delete(:start) || 0
+      @total   = total.to_i
+      @opts    = opts
+      @complete_proc = block_given? ? block : Proc.new { }
+    end
+
+    def inc!(increment = 1)
+      @current += increment.to_i
+      @complete_proc.call(self) if @current == total
+      Formatador.redisplay_progressbar(current, total, opts)
+    end
+
+  end
+
   def redisplay_progressbar(current, total, options = {})
     options = { :color => 'white', :width => 50, :new_line => true }.merge!(options)
     data = progressbar(current, total, options)
