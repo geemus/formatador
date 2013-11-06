@@ -27,6 +27,32 @@ You use tags, similar to html, to set formatting options:
 * display_compact_table: Same as display_table, execpt that split lines are not drawn by default in the body of the table. If you need a split line, put a :split constant in the body array.
 * redisplay_progressbar: takes the current and total values as its first two arguments and redisplays a progressbar (until current = total and then it display_lines). An optional third argument represents the start time and will add an elapsed time counter.
 
+=== Progress Bar examples
+
+  total    = 1000
+  progress = ProgressBar.new(total)
+  1000.times do
+    progress.inc!
+  end
+
+   978/1000  |************************************************* |
+
+  # Change the color of the bar
+
+  total    = 1000
+  progress = ProgressBar.new(total, :color => "light_blue")
+  1000.times do
+    progress.inc!
+  end
+
+  # Change the color of a completed progress bar
+
+  total    = 1000
+  progress = ProgressBar.new(total) { |b| b.opts[:color] = "green" }
+  1000.times do
+    progress.inc!
+  end
+
 === Table examples
 
   table_data = [{:name => "Joe", :food => "Burger"}, {:name => "Bill", :food => "French fries"}]
