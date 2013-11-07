@@ -11,7 +11,7 @@ class Formatador
       @complete_proc = block_given? ? block : Proc.new { }
     end
 
-    def inc!(increment = 1)
+    def increment(increment = 1)
       @current += increment.to_i
       @complete_proc.call(self) if @current == total
       Formatador.redisplay_progressbar(current, total, opts)

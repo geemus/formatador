@@ -32,7 +32,7 @@ You use tags, similar to html, to set formatting options:
   total    = 1000
   progress = ProgressBar.new(total)
   1000.times do
-    progress.inc!
+    progress.increment
   end
 
    978/1000  |************************************************* |
@@ -42,7 +42,7 @@ You use tags, similar to html, to set formatting options:
   total    = 1000
   progress = ProgressBar.new(total, :color => "light_blue")
   1000.times do
-    progress.inc!
+    progress.increment
   end
 
   # Change the color of a completed progress bar
@@ -50,7 +50,7 @@ You use tags, similar to html, to set formatting options:
   total    = 1000
   progress = ProgressBar.new(total) { |b| b.opts[:color] = "green" }
   1000.times do
-    progress.inc!
+    progress.increment
   end
 
 === Table examples
