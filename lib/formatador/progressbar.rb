@@ -1,4 +1,35 @@
+require 'thread'
+
 class Formatador
+
+  class ProgressBar
+
+    attr_accessor :current, :total, :opts
+
+    def initialize(total, opts = {}, &block)
+      @current = opts.delete(:start) || 0
+      @total   = total.to_i
+      @opts    = opts
+      @lock    = Mutex.new
+      @complete_proc = block_given? ? block : Proc.new { }
+    end
+
+    def increment(increment = 1)
+      @lock.synchronize do
+        return if complete?
+        @current += increment.to_i
+        @complete_proc.call(self) if complete?
+        Formatador.redisplay_progressbar(current, total, opts)
+      end
+    end
+
+    private
+
+      def complete?
+        current == total
+      end
+
+  end
 
   def redisplay_progressbar(current, total, options = {})
     options = { :color => 'white', :width => 50, :new_line => true }.merge!(options)
