@@ -56,13 +56,14 @@ class Formatador
   PARSE_REGEX  = /\[(#{ STYLES.keys.join('|') })\]/ix
   INDENT_REGEX = /\[indent\]/ix
 
-  def initialize
+  def initialize(io = $stdout)
     @indent = 1
+    @io = io
   end
 
   def display(string = '')
-    print(parse("[indent]#{string}"))
-    STDOUT.flush
+    @io.print(parse("[indent]#{string}"))
+    @io.flush
     nil
   end
 
@@ -80,7 +81,7 @@ class Formatador
   end
 
   def parse(string)
-    if STDOUT.tty?
+    if @io.tty?
       string.gsub(PARSE_REGEX) { "\e[#{STYLES[$1.to_sym]}m" }.gsub(INDENT_REGEX) { indentation }
     else
       strip(string)
@@ -99,7 +100,7 @@ class Formatador
   end
 
   def redisplay(string = '', width = 120)
-    print("\r#{' ' * width}\r")
+    @io.print("\r#{' ' * width}\r")
     display("#{string}")
     nil
   end
@@ -111,7 +112,7 @@ class Formatador
   end
 
   def new_line
-    print("\n")
+    @io.print("\n")
     nil
   end
 
