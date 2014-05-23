@@ -13,8 +13,8 @@ Gem::Specification.new do |s|
   ## If your rubyforge_project name is different, then edit it and comment out
   ## the sub! line in the Rakefile
   s.name              = 'formatador'
-  s.version           = '0.2.4'
-  s.date              = '2012-10-26'
+  s.version           = '0.2.5'
+  s.date              = '2014-05-23'
   s.rubyforge_project = 'formatador'
 
   ## Make sure your summary is short. The description may be as long
@@ -60,7 +60,10 @@ Gem::Specification.new do |s|
   ## THE MANIFEST COMMENTS, they are used as delimiters by the task.
   # = MANIFEST =
   s.files = %w[
+    CONTRIBUTING.md
+    CONTRIBUTORS.md
     Gemfile
+    LICENSE.md
     README.rdoc
     Rakefile
     changelog.txt
