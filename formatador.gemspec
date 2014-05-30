@@ -28,6 +28,7 @@ Gem::Specification.new do |s|
   s.authors  = ["geemus (Wesley Beary)"]
   s.email    = 'geemus@gmail.com'
   s.homepage = "http://github.com/geemus/#{s.name}"
+  s.license  = 'MIT'
 
   ## This gets added to the $LOAD_PATH so that 'lib/NAME.rb' can be required as
   ## require 'NAME.rb' or'/lib/NAME/file.rb' can be as require 'NAME/file.rb'
