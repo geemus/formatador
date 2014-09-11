@@ -21,3 +21,4 @@ pkg
 ## PROJECT::SPECIFIC
 Gemfile.lock
 .bundle/
+doc/
