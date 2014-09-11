@@ -62,7 +62,7 @@ class Formatador
 
   def display(string = '')
     print(parse("[indent]#{string}"))
-    STDOUT.flush
+    $stdout.flush
     nil
   end
 
@@ -80,7 +80,7 @@ class Formatador
   end
 
   def parse(string)
-    if STDOUT.tty?
+    if $stdout.tty?
       string.gsub(PARSE_REGEX) { "\e[#{STYLES[$1.to_sym]}m" }.gsub(INDENT_REGEX) { indentation }
     else
       strip(string)

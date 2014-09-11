@@ -5,9 +5,15 @@ require 'rubygems'
 require 'shindo'
 require 'stringio'
 
+class TTYStringIO < StringIO
+  def tty?
+    true
+  end
+end
+
 def capture_stdout
   old_stdout = $stdout
-  new_stdout = StringIO.new
+  new_stdout = TTYStringIO.new
   $stdout = new_stdout
   yield
   $stdout = old_stdout
