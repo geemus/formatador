@@ -2,6 +2,8 @@
 
 STDOUT text formatting
 
+[![Build Status]](https://travis-ci.org/geemus/formatador.svg)
+
 == Quick and dirty
 
 You can call class methods to print out single lines like this:
