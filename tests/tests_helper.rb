@@ -5,7 +5,7 @@ require 'rubygems'
 require 'shindo'
 require 'stringio'
 
-class TTYStringIO < StringIO
+class StringIO
   def tty?
     true
   end
@@ -13,7 +13,7 @@ end
 
 def capture_stdout
   old_stdout = $stdout
-  new_stdout = TTYStringIO.new
+  new_stdout = StringIO.new
   $stdout = new_stdout
   yield
   $stdout = old_stdout
