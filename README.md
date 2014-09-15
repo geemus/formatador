@@ -2,7 +2,7 @@
 
 STDOUT text formatting
 
-[![Build Status]](https://travis-ci.org/geemus/formatador.svg)
+[![Build Status](https://travis-ci.org/geemus/formatador.svg)](http://travis-ci.org/geemus/formatador)
 
 ## Quick and dirty
 
