@@ -1,36 +1,41 @@
-= formatador
+# formatador
 
 STDOUT text formatting
 
 [![Build Status]](https://travis-ci.org/geemus/formatador.svg)
 
-== Quick and dirty
+## Quick and dirty
 
 You can call class methods to print out single lines like this:
 
-  Formatador.display_line('Hello World')
+```
+Formatador.display_line('Hello World')
+```
 
 You use tags, similar to html, to set formatting options:
 
-  Formatador.display_line('[green]Hello World[/]')
+```
+Formatador.display_line('[green]Hello World[/]')
+```
 
-  [/] resets everything to normal, colors are supported and [_color_] sets the background color.
+`[/]` resets everything to normal, colors are supported and `[_color_]` sets the background color.
 
-== Standard options
+## Standard options
 
 * format - and adds color codes if STDOUT.tty? is true
 * display - calls format on the input and prints it
 * display_line - calls display, but adds on a newline (\n)
 * redisplay - Displays text, prepended with \r which will overwrite the last existing line
 
-== Extensions
+## Extensions
 
 * display_table: takes an array of hashes. Each hash is a row, with the keys being the headers and values being the data. An optional second argument can specify which headers/columns to include and in what order they should appear.
 * display_compact_table: Same as display_table, execpt that split lines are not drawn by default in the body of the table. If you need a split line, put a :split constant in the body array.
 * redisplay_progressbar: takes the current and total values as its first two arguments and redisplays a progressbar (until current = total and then it display_lines). An optional third argument represents the start time and will add an elapsed time counter.
 
-=== Progress Bar examples
+### Progress Bar examples
 
+```
   total    = 1000
   progress = ProgressBar.new(total)
   1000.times do
@@ -54,9 +59,11 @@ You use tags, similar to html, to set formatting options:
   1000.times do
     progress.increment
   end
+```
 
-=== Table examples
+### Table examples
 
+```
   table_data = [{:name => "Joe", :food => "Burger"}, {:name => "Bill", :food => "French fries"}]
   Formatador.display_table(table_data)
 
@@ -81,23 +88,26 @@ You use tags, similar to html, to set formatting options:
   +------+------------+
   | Bill | soda       |
   +------+------------+
+```
 
-== Indentation
+## Indentation
 
 By initializing a formatador object you can keep track of indentation:
 
+```
   formatador = Formatador.new
   formatador.display_line('one level of indentation')
   formatador.indent {
     formatador.display_line('two levels of indentation')
   }
   formatador.display_line('one level of indentation')
+```
 
 == Copyright
 
 (The MIT License)
 
-Copyright (c) 2009 {geemus (Wesley Beary)}[http://github.com/geemus]
+Copyright (c) 2014 {geemus (Wesley Beary)}[http://github.com/geemus]
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
