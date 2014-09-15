@@ -5,6 +5,12 @@ require 'rubygems'
 require 'shindo'
 require 'stringio'
 
+class IO
+  def tty?
+    true
+  end
+end
+
 class StringIO
   def tty?
     true
