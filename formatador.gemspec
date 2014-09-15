@@ -54,6 +54,7 @@ Gem::Specification.new do |s|
   ## List your development dependencies here. Development dependencies are
   ## those that are only needed during development
   s.add_development_dependency('rake')
+  s.add_development_dependency('rdoc')
   s.add_development_dependency('shindo')
 
   ## Leave this section as-is. It will be automatically generated from the
