@@ -103,11 +103,11 @@ By initializing a formatador object you can keep track of indentation:
   formatador.display_line('one level of indentation')
 ```
 
-== Copyright
+## Copyright
 
 (The MIT License)
 
-Copyright (c) 2014 {geemus (Wesley Beary)}[http://github.com/geemus]
+Copyright (c) 2015 [geemus (Wesley Beary)](http://github.com/geemus)
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
