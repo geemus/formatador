@@ -1,3 +1,4 @@
+# coding: utf-8
 Shindo.tests("Formatador: tables") do
 
 output = <<-OUTPUT
@@ -90,6 +91,24 @@ output = Formatador.parse(output)
   tests("#display_table([{:a => 1, 'just.pointed' => :value}])").returns(output) do
     capture_stdout do
       Formatador.display_table([{:a => 1, 'just.pointed' => :value}])
+    end
+  end
+
+
+output = <<-OUTPUT
+    +------+
+    | [bold]a[/]    |
+    +------+
+    | 1    |
+    +------+
+    | 震度 |
+    +------+
+OUTPUT
+output = Formatador.parse(output)
+
+  tests("#display_table([{:a => 1}, {:a => 2}])").returns(output) do
+    capture_stdout do
+      Formatador.display_table([{:a => 1}, {:a => "震度"}])
     end
   end
 

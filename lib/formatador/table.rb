@@ -80,7 +80,7 @@ class Formatador
   private
 
   def length(value)
-    value.to_s.gsub(PARSE_REGEX, '').length
+    Unicode.width(value.to_s.gsub(PARSE_REGEX, ''))
   end
 
   def calculate_datum(header, hash)
