@@ -80,7 +80,11 @@ class Formatador
   private
 
   def length(value)
-    Unicode.width(value.to_s.gsub(PARSE_REGEX, ''))
+    if ['jruby'].include?(RbConfig::CONFIG['ruby_install_name'])
+      value.to_s.gsub(PARSE_REGEX, '').length
+    else
+      Unicode.width(value.to_s.gsub(PARSE_REGEX, ''))
+    end
   end
 
   def calculate_datum(header, hash)

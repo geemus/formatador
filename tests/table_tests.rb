@@ -95,6 +95,7 @@ output = Formatador.parse(output)
   end
 
 
+unless ['jruby'].include?(RbConfig::CONFIG['ruby_install_name'])
 output = <<-OUTPUT
     +------+
     | [bold]a[/]    |
@@ -104,11 +105,12 @@ output = <<-OUTPUT
     | 震度 |
     +------+
 OUTPUT
-output = Formatador.parse(output)
+  output = Formatador.parse(output)
 
-  tests("#display_table([{:a => 1}, {:a => 2}])").returns(output) do
-    capture_stdout do
-      Formatador.display_table([{:a => 1}, {:a => "震度"}])
+    tests("#display_table([{:a => 1}, {:a => 2}])").returns(output) do
+      capture_stdout do
+        Formatador.display_table([{:a => 1}, {:a => "震度"}])
+      end
     end
   end
 
