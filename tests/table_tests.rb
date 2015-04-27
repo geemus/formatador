@@ -95,7 +95,7 @@ output = Formatador.parse(output)
   end
 
 
-unless ['jruby'].include?(RbConfig::CONFIG['ruby_install_name'])
+  if Module.const_defined?(:Unicode)
 output = <<-OUTPUT
     +------+
     | [bold]a[/]    |

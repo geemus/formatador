@@ -1,6 +1,5 @@
 require File.join(File.dirname(__FILE__), 'formatador', 'table')
 require File.join(File.dirname(__FILE__), 'formatador', 'progressbar')
-require 'unicode'
 
 class Formatador
 
