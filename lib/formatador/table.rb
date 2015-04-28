@@ -80,6 +80,13 @@ class Formatador
   private
 
   def length(value)
+    if Module.const_defined?(:Unicode)
+      Unicode.width(value.to_s.gsub(PARSE_REGEX, ''))
+    else
+      value.to_s.gsub(PARSE_REGEX, '').length
+    end
+
+  rescue NotImplementedError
     value.to_s.gsub(PARSE_REGEX, '').length
   end
 
