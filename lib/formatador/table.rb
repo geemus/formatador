@@ -98,7 +98,7 @@ class Formatador
         datum = d[split] || d[split.to_sym] || ''
       end
     else
-      datum = hash[header] || ''
+      datum = hash.fetch(header, '')
     end
     datum
   end
