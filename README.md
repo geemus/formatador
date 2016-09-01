@@ -8,13 +8,13 @@ STDOUT text formatting
 
 You can call class methods to print out single lines like this:
 
-```
+```ruby
 Formatador.display_line('Hello World')
 ```
 
 You use tags, similar to html, to set formatting options:
 
-```
+```ruby
 Formatador.display_line('[green]Hello World[/]')
 ```
 
@@ -35,72 +35,88 @@ Formatador.display_line('[green]Hello World[/]')
 
 ### Progress Bar examples
 
-```
-  total    = 1000
-  progress = ProgressBar.new(total)
-  1000.times do
-    progress.increment
-  end
+```ruby
+total    = 1000
+progress = ProgressBar.new(total)
 
-   978/1000  |************************************************* |
+1000.times do
+  progress.increment
+end
 
-  # Change the color of the bar
+#=> 978/1000  |************************************************* |
 
-  total    = 1000
-  progress = ProgressBar.new(total, :color => "light_blue")
-  1000.times do
-    progress.increment
-  end
+# Change the color of the bar
+total    = 1000
+progress = ProgressBar.new(total, :color => "light_blue")
 
-  # Change the color of a completed progress bar
+1000.times do
+  progress.increment
+end
 
-  total    = 1000
-  progress = ProgressBar.new(total) { |b| b.opts[:color] = "green" }
-  1000.times do
-    progress.increment
-  end
+# Change the color of a completed progress bar
+total    = 1000
+progress = ProgressBar.new(total) { |b| b.opts[:color] = "green" }
+
+1000.times do
+  progress.increment
+end
 ```
 
 ### Table examples
 
-```
-  table_data = [{:name => "Joe", :food => "Burger"}, {:name => "Bill", :food => "French fries"}]
-  Formatador.display_table(table_data)
+```ruby
+table_data = [
+  { :name => "Joe",  :food => "Burger" },
+  { :name => "Bill", :food => "French fries" }
+]
+Formatador.display_table(table_data)
 
-  +------+--------------+
-  | name | food         |
-  +------+--------------+
-  | Joe  | Burger       |
-  +------+--------------+
-  | Bill | French fries |
-  +------+--------------+
+#=> +------+--------------+
+#   | name | food         |
+#   +------+--------------+
+#   | Joe  | Burger       |
+#   +------+--------------+
+#   | Bill | French fries |
+#   +------+--------------+
 
-  table_data = [
-    {:name => "Joe", :meal => {:main_dish => "Burger", :drink => "water"}}, 
-    {:name => "Bill", :meal => {:main_dish => "Chicken", :drink => "soda"}}
-  ]
-  Formatador.display_table(table_data, [:name, :"meal.drink"])
+table_data = [
+  {
+    :name => "Joe",
+    :meal => {
+      :main_dish => "Burger",
+      :drink => "water"
+    }
+  },
+  {
+    :name => "Bill",
+    :meal => {
+      :main_dish => "Chicken",
+      :drink => "soda"
+    }
+  }
+]
+Formatador.display_table(table_data, [:name, :"meal.drink"])
 
-  +------+------------+
-  | name | meal.drink |
-  +------+------------+
-  | Joe  | water      |
-  +------+------------+
-  | Bill | soda       |
-  +------+------------+
+#=> +------+------------+
+#   | name | meal.drink |
+#   +------+------------+
+#   | Joe  | water      |
+#   +------+------------+
+#   | Bill | soda       |
+#   +------+------------+
 ```
 
 ## Indentation
 
 By initializing a formatador object you can keep track of indentation:
 
-```
-  formatador = Formatador.new
-  formatador.display_line('one level of indentation')
-  formatador.indent {
-    formatador.display_line('two levels of indentation')
-  }
-  formatador.display_line('one level of indentation')
+```ruby
+formatador = Formatador.new
+formatador.display_line('one level of indentation')
+formatador.indent {
+  formatador.display_line('two levels of indentation')
+}
+formatador.display_line('one level of indentation')
 ```
 
 ## Copyright
