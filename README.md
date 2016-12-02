@@ -37,7 +37,7 @@ Formatador.display_line('[green]Hello World[/]')
 
 ```ruby
 total    = 1000
-progress = ProgressBar.new(total)
+progress = Formatador::ProgressBar.new(total)
 
 1000.times do
   progress.increment
@@ -47,7 +47,7 @@ end
 
 # Change the color of the bar
 total    = 1000
-progress = ProgressBar.new(total, :color => "light_blue")
+progress = Formatador::ProgressBar.new(total, :color => "light_blue")
 
 1000.times do
   progress.increment
@@ -55,7 +55,7 @@ end
 
 # Change the color of a completed progress bar
 total    = 1000
-progress = ProgressBar.new(total) { |b| b.opts[:color] = "green" }
+progress = Formatador::ProgressBar.new(total) { |b| b.opts[:color] = "green" }
 
 1000.times do
   progress.increment
