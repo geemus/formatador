@@ -83,11 +83,11 @@ class Formatador
     if Module.const_defined?(:Unicode)
       Unicode.width(value.to_s.gsub(PARSE_REGEX, ''))
     else
-      value.to_s.gsub(PARSE_REGEX, '').length
+      value.to_s.gsub(PARSE_REGEX, '').chars.reduce(0) { |sum, char| sum += char.bytesize > 1 ? 2 : 1 }
     end
 
   rescue NotImplementedError
-    value.to_s.gsub(PARSE_REGEX, '').length
+    value.to_s.gsub(PARSE_REGEX, '').chars.reduce(0) { |sum, char| sum += char.bytesize > 1 ? 2 : 1 }
   end
 
   def calculate_datum(header, hash)

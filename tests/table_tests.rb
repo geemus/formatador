@@ -95,7 +95,6 @@ output = Formatador.parse(output)
   end
 
 
-  if Module.const_defined?(:Unicode)
 output = <<-OUTPUT
     +------+
     | [bold]a[/]    |
@@ -107,10 +106,9 @@ output = <<-OUTPUT
 OUTPUT
   output = Formatador.parse(output)
 
-    tests("#display_table([{:a => 1}, {:a => 2}])").returns(output) do
-      capture_stdout do
-        Formatador.display_table([{:a => 1}, {:a => "震度"}])
-      end
+  tests("#display_table([{:a => 1}, {:a => 2}])").returns(output) do
+    capture_stdout do
+      Formatador.display_table([{:a => 1}, {:a => "震度"}])
     end
   end
 
