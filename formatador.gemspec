@@ -15,7 +15,6 @@ Gem::Specification.new do |s|
   s.name              = 'formatador'
   s.version           = '0.2.5'
   s.date              = '2014-05-23'
-  s.rubyforge_project = 'formatador'
 
   ## Make sure your summary is short. The description may be as long
   ## as you like.
