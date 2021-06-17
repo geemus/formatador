@@ -3,7 +3,7 @@ require File.join(File.dirname(__FILE__), 'formatador', 'progressbar')
 
 class Formatador
 
-  VERSION = '0.2.5'
+  VERSION = '0.3.0'
 
   STYLES = {
     :"\/"             => "0",
