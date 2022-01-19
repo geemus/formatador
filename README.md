@@ -2,7 +2,7 @@
 
 STDOUT text formatting
 
-[![Build Status](https://travis-ci.org/geemus/formatador.svg)](http://travis-ci.org/geemus/formatador)
+[![Build Status](https://github.com/geemus/formatador/actions/workflows/ruby.yml/badge.svg)](https://github.com/geemus/formatador/actions/workflows/ruby.yml)
 
 ## Quick and dirty
 
@@ -123,7 +123,7 @@ formatador.display_line('one level of indentation')
 
 (The MIT License)
 
-Copyright (c) 2015 [geemus (Wesley Beary)](http://github.com/geemus)
+Copyright (c) 2022 [geemus (Wesley Beary)](http://github.com/geemus)
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
