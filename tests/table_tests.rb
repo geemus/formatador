@@ -94,6 +94,21 @@ output = Formatador.parse(output)
     end
   end
 
+output = <<-OUTPUT
+    +-------------------------+----------------+
+    | [bold]right-justify a numeric[/] | [bold]standard value[/] |
+    +-------------------------+----------------+
+    |                   12345 | value          |
+    +-------------------------+----------------+
+OUTPUT
+output = Formatador.parse(output)
+
+  tests("#display_table([{'right-justify a numeric' => 12345, 'standard value' => 'standard value'}], numeric_rjust: true)").returns(output) do
+    capture_stdout do
+      Formatador.display_table([{'right-justify a numeric' => 12345, 'standard value' => 'value'}], numeric_rjust: true)
+    end
+  end
+
 
 output = <<-OUTPUT
     +------+
