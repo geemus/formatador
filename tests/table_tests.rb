@@ -106,7 +106,7 @@ output = <<-OUTPUT
 OUTPUT
   output = Formatador.parse(output)
 
-  tests("#display_table([{:a => 1}, {:a => 2}])").returns(output) do
+  tests("#display_table([{:a => 1}, {:a => '震度'}])").returns(output) do
     capture_stdout do
       Formatador.display_table([{:a => 1}, {:a => "震度"}])
     end
