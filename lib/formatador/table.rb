@@ -1,13 +1,13 @@
 class Formatador
-  def display_table(hashes, keys = nil, numeric_rjust: false, &block)
+  def display_table(hashes, keys = nil, **options, &block)
     new_hashes = hashes.inject([]) do |accum,item|
       accum << :split unless accum.empty?
       accum << item
     end
-    display_compact_table(new_hashes, keys, numeric_rjust: numeric_rjust, &block)
+    display_compact_table(new_hashes, keys, **options, &block)
   end
 
-  def display_compact_table(hashes, keys = nil, numeric_rjust: false, &block)
+  def display_compact_table(hashes, keys = nil, **options, &block)
     headers = keys || []
     widths = {}
 
@@ -64,7 +64,7 @@ class Formatador
           width = widths[header] - length(datum)
           width = width < 0 ? 0 : width
 
-          datum.is_a?(Numeric) && numeric_rjust ? "#{' ' * width}#{datum}" : "#{datum}#{' ' * width}"
+          datum.is_a?(Numeric) && options[:numeric_rjust] ? "#{' ' * width}#{datum}" : "#{datum}#{' ' * width}"
         end
         display_line("| #{columns.join(' | ')} |")
       else
