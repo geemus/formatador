@@ -109,6 +109,21 @@ output = Formatador.parse(output)
     end
   end
 
+output = <<-OUTPUT
+    +--------+------------+
+    | [bold]header[/] | [bold]nested.key[/] |
+    +--------+------------+
+    |  12345 | value      |
+    +--------+------------+
+OUTPUT
+output = Formatador.parse(output)
+
+  tests("#display_table([{:header => 12345, :nested => {:key => value}}], [:header, :'nested.key'], numeric_rjust: true)").returns(output) do
+    capture_stdout do
+      Formatador.display_table([{:header => 12345, :nested => {:key => 'value'}}], [:header, :'nested.key'], numeric_rjust: true)
+    end
+  end
+
 
 output = <<-OUTPUT
     +------+
