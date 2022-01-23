@@ -119,11 +119,20 @@ class Formatador
     string.gsub(PARSE_REGEX, '').gsub(INDENT_REGEX) { indentation }
   end
 
-  %w{display display_line display_lines display_table display_compact_table indent parse redisplay redisplay_line new_line redisplay_progressbar}.each do |method|
+  %w{display display_line display_lines indent parse redisplay redisplay_line new_line redisplay_progressbar}.each do |method|
     eval <<-DEF
       def self.#{method}(*args, &block)
         Thread.current[:formatador] ||= new
         Thread.current[:formatador].#{method}(*args, &block)
+      end
+    DEF
+  end
+
+  %w{display_table display_compact_table}.each do |method|
+    eval <<-DEF
+      def self.#{method}(*args, **kwargs, &block)
+        Thread.current[:formatador] ||= new
+        Thread.current[:formatador].#{method}(*args, **kwargs, &block)
       end
     DEF
   end
