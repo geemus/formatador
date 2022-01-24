@@ -77,8 +77,4 @@ Gem::Specification.new do |s|
     tests/tests_helper.rb
   ]
   # = MANIFEST =
-
-  ## Test files will be grabbed from the file list. Make sure the path glob
-  ## matches what you actually use.
-  s.test_files = s.files.select { |path| path =~ /^[spec|tests]\/.*_[spec|tests]\.rb/ }
 end
