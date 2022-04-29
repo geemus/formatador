@@ -1,3 +1,12 @@
+v1.1.0 01/24/22
+===============
+
+fixes to support ruby 3+
+add options for right justifying numerics
+drop unused gemspec directive
+use https for rubygems.org in gemspec
+drop duplicate bundle install from CI setup
+
 v1.0.0 01/20/21
 ===============
 
