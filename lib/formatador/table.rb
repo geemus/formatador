@@ -70,7 +70,7 @@ class Formatador
       else
         if hash == :split
           display_line(split)
-        end 
+        end
       end
       nil
     end
@@ -80,7 +80,7 @@ class Formatador
   private
 
   def length(value)
-    if Module.const_defined?(:Unicode)
+    if Module.const_defined?(:Unicode) && Unicode.respond_to?(:width)
       Unicode.width(value.to_s.gsub(PARSE_REGEX, ''))
     else
       value.to_s.gsub(PARSE_REGEX, '').chars.reduce(0) { |sum, char| sum += char.bytesize > 1 ? 2 : 1 }
