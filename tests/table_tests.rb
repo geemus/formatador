@@ -64,6 +64,16 @@ output = Formatador.parse(output)
     end
   end
 
+
+if (RUBY_VERSION.split('.').map(&:to_i) <=> [3, 4, 0]).positive?
+output = <<-OUTPUT
+    +---+----------------+
+    | [bold]a[/] | [bold]nested[/]         |
+    +---+----------------+
+    | 1 | {key: "value"} |
+    +---+----------------+
+OUTPUT
+else
 output = <<-OUTPUT
     +---+-----------------+
     | [bold]a[/] | [bold]nested[/]          |
@@ -71,6 +81,7 @@ output = <<-OUTPUT
     | 1 | {:key=>"value"} |
     +---+-----------------+
 OUTPUT
+end
 output = Formatador.parse(output)
 
   tests("#display_table([{:a => 1, :nested => {:key => 'value'}}])").returns(output) do
