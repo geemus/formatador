@@ -14,7 +14,7 @@ class Formatador
     # Calculate Widths
     if hashes.empty? && keys
       keys.each do |key|
-        widths[key] = key.to_s.length
+        widths[key] = length(key)
       end
     else
       hashes.each do |hash|
@@ -24,7 +24,7 @@ class Formatador
           if !keys
             headers << key
           end
-          widths[key] = [ length(key), widths[key] || 0, length(calculate_datum(key, hash)) || 0].max
+          widths[key] = [length(key), widths[key] || 0, length(calculate_datum(key, hash)) || 0].max
         end
         headers = headers.uniq
       end
@@ -52,7 +52,7 @@ class Formatador
     # Display data row
     columns = []
     headers.each do |header|
-      columns << "[bold]#{header}[/]#{' ' * (widths[header] - header.to_s.length)}"
+      columns << "[bold]#{header}[/]#{' ' * (widths[header] - length(header))}"
     end
     display_line("| #{columns.join(' | ')} |")
     display_line(split)
