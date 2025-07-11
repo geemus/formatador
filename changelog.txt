@@ -1,3 +1,16 @@
+v1.1.1 07/11/25
+===============
+
+update actions/stale
+update actions/checkout
+improve unicode support
+update ruby versions in test matrix
+add funding info
+move scheduled CI to weekly
+update tested ruby versions
+more consistently use length method in tables
+adjust expected test output for Ruby 3.4+
+
 v1.1.0 01/24/22
 ===============
 
