@@ -13,8 +13,8 @@ Gem::Specification.new do |s|
   ## If your rubyforge_project name is different, then edit it and comment out
   ## the sub! line in the Rakefile
   s.name              = 'formatador'
-  s.version           = '1.1.0'
-  s.date              = '2022-01-24'
+  s.version           = '1.1.1'
+  s.date              = '2025-07-11'
 
   ## Make sure your summary is short. The description may be as long
   ## as you like.
@@ -67,6 +67,7 @@ Gem::Specification.new do |s|
     LICENSE.md
     README.md
     Rakefile
+    SECURITY.md
     changelog.txt
     formatador.gemspec
     lib/formatador.rb
