@@ -1,3 +1,8 @@
+v1.2.0 08/08/25
+===============
+
+switch to reline for table-width calculations
+
 v1.1.1 07/11/25
 ===============
 
