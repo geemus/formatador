@@ -153,4 +153,22 @@ OUTPUT
     end
   end
 
+output = <<-OUTPUT
+    +----+
+    | [bold]a[/]  |
+    +----+
+    | 1  |
+    +----+
+    | 🤷 |
+    +----+
+OUTPUT
+  output = Formatador.parse(output)
+
+  tests("#display_table([{:a => 1}, {:a => '🤷'}])").returns(output) do
+    capture_stdout do
+      Formatador.display_table([{:a => 1}, {:a => '🤷'}])
+    end
+  end
+
+
 end

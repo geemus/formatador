@@ -1,6 +1,8 @@
 require File.join(File.dirname(__FILE__), 'formatador', 'table')
 require File.join(File.dirname(__FILE__), 'formatador', 'progressbar')
 
+require 'reline' # for table char width calculations
+
 class Formatador
 
   VERSION = '1.1.1'
