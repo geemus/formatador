@@ -82,7 +82,7 @@ class Formatador
   end
 
   def parse(string)
-    if $stdout.tty?
+    if color_support
       string.gsub(PARSE_REGEX) { "\e[#{STYLES[$1.to_sym]}m" }.gsub(INDENT_REGEX) { indentation }
     else
       strip(string)
@@ -139,4 +139,9 @@ class Formatador
     DEF
   end
 
+  private
+
+  def color_support
+    @color_support ||= $stdout.tty? || ENV['GITHUB_ACTIONS'] == 'true'
+  end
 end
