@@ -1,3 +1,9 @@
+v1.2.1 09/17/25
+===============
+
+add color output support for github actions
+fix most lints
+
 v1.2.0 08/08/25
 ===============
 
