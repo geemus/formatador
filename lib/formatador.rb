@@ -12,6 +12,7 @@ class Formatador
     "\/": '0',
     reset: '0',
     bold: '1',
+    faint: '2',
     underline: '4',
     blink_slow: '5',
     blink_fast: '6',
