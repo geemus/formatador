@@ -6,7 +6,7 @@ require File.join(File.dirname(__FILE__), 'formatador', 'progressbar')
 require 'reline' # for table char width calculations
 
 class Formatador
-  VERSION = '1.2.2'
+  VERSION = '1.2.3'
 
   STYLES = {
     "\/": '0',
