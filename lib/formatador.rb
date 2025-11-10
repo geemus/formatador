@@ -119,11 +119,17 @@ class Formatador
     nil
   end
 
+  def set_title(title)
+    print("\033]0;#{title}\007")
+    $stdout.flush
+    nil
+  end
+
   def strip(string)
     string.gsub(PARSE_REGEX, '').gsub(INDENT_REGEX) { indentation }
   end
 
-  %w[display display_line display_lines indent parse redisplay redisplay_line new_line redisplay_progressbar].each do |method|
+  %w[display display_line display_lines indent parse redisplay redisplay_line new_line redisplay_progressbar set_title].each do |method|
     eval <<-DEF
       def self.#{method}(*args, &block)
         Thread.current[:formatador] ||= new
